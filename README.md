@@ -1,7 +1,7 @@
 Blendqueue
 ==========
 This tool is divided in two programs. `blenderenqueue.py` moves a blender file to the central fileserver and adds the
-file to the [rabbitmq][rmq] queue for rendering. On your each render node you start `blenderworker.py` and it receives one
+file to the [rabbitmq][rmq] queue for rendering. On each render node you start `blenderworker.py` and it receives one
 task from the rabbitmq server and renders it using [blender].
 
 Requirements
