@@ -2,6 +2,8 @@ import pika
 import json
 import configparser
 import argparse
+import shutil
+import os
 
 parser = argparse.ArgumentParser(description="Tool to put tasks in the rabbitmq queue for blender-queue")
 parser.add_argument('-c', '--configfile', help="Set config file to use", default="blenderqueue.cfg", type=open)
@@ -42,6 +44,9 @@ rabbitmqUrl = "amqp://{config[user]}:{config[pass]}@{config[host]}:{config[port]
 connection = pika.BlockingConnection(pika.URLParameters(rabbitmqUrl))
 channel = connection.channel()
 channel.queue_declare(queue='render', durable=True)
+
+os.mkdir(os.path.normpath(config["storage"]["path"] + "/" + args.name))
+shutil.copy(args.file, os.path.normpath(config["storage"]["path"] + "/" + args.name + "/input.blend"))
 
 for frame in range(startFrame, endFrame + 1):
     task = {
