@@ -104,6 +104,11 @@ class BlenderWorker:
             # Check for save message with filename
             if line[0:6] == "Saved:":
                 filename = line.split(' ')[1]
+
+                # Remove storage path from filename as this is node specific
+                filename = filename.replace(self.config["storage"]["path"], "")
+
+                # Send the filename and task info to the postprocess queue
                 self.send("postprocess", {
                     'task': task,
                     'file': filename
