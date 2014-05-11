@@ -23,7 +23,7 @@ $ pip install pika
 Rabbit server:
 
 ```bash
-# apt get install rabbitmq
+$ apt get install rabbitmq
 ```
 
 Worker node:
@@ -41,7 +41,7 @@ Both tools read their config from blenderqueue.cfg in the current directory by d
 
 Example blenderqueue.cfg:
 
-```conf
+```ini
 [rabbitmq]
 server=127.0.0.1
 username=guest
