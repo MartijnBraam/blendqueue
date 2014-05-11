@@ -47,7 +47,7 @@ server=127.0.0.1
 username=guest
 password=guest
 port=5672
-virtualhost=%%2f #this is an config-escaped urlencoded /
+virtualhost=%%2f #this is a config-escaped urlencoded /
 
 [storage]
 path=/mnt/storage/rabbit/blender
