@@ -56,11 +56,14 @@ channel = connection.channel()
 # Declare render queue if it don't exist yet
 channel.queue_declare(queue='render', durable=True)
 
-# Create a new directory on the fileserver with the task name
-os.mkdir(os.path.normpath(config["storage"]["path"] + "/" + args.name))
+# Check if file is already uploaded to fileserver, if not then upload
+if not os.path.isfile(os.path.normpath(config["storage"]["path"] + "/" + args.name + "/input.blend")):
 
-# Copy the blend file to the fileserver
-shutil.copy(args.file, os.path.normpath(config["storage"]["path"] + "/" + args.name + "/input.blend"))
+    # Create a new directory on the fileserver with the task name
+    os.mkdir(os.path.normpath(config["storage"]["path"] + "/" + args.name))
+
+    # Copy the blend file to the fileserver
+    shutil.copy(args.file, os.path.normpath(config["storage"]["path"] + "/" + args.name + "/input.blend"))
 
 # Loop through the frames defined by the arguments
 for frame in range(startFrame, endFrame + 1):
